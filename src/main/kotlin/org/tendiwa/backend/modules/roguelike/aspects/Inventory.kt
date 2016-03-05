@@ -1,14 +1,14 @@
-package aspects
+package org.tendiwa.backend.modules.roguelike.aspects
 
 import org.tendiwa.backend.modules.roguelike.archetypes.BundleItem
 import org.tendiwa.backend.modules.roguelike.archetypes.Item
 import org.tendiwa.backend.modules.roguelike.archetypes.UniqueItem
+import org.tendiwa.backend.space.Reality
 import org.tendiwa.existence.NoReactionAspect
 import org.tendiwa.existence.NoStimuliAspectKind
 import org.tendiwa.existence.RealThing
 import org.tendiwa.stimuli.Stimulus
 import org.tendiwa.stimuli.StimulusKind
-import org.tendiwa.world.Reality
 import java.util.*
 
 class Inventory() : NoReactionAspect(kind) {

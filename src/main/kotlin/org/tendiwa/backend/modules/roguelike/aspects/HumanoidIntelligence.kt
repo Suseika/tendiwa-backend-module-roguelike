@@ -1,8 +1,10 @@
-package aspects
+package org.tendiwa.backend.modules.roguelike.aspects
 
 import org.tendiwa.backend.modules.roguelike.archetypes.Character
-import org.tendiwa.backend.modules.roguelike.aspects.NPCVision
-import org.tendiwa.backend.modules.roguelike.aspects.position
+import org.tendiwa.backend.space.Reality
+import org.tendiwa.backend.space.Voxel
+import org.tendiwa.backend.space.realThing.things
+import org.tendiwa.backend.space.realThing.viewOfArea
 import org.tendiwa.collections.randomElement
 import org.tendiwa.existence.NoReactionAspect
 import org.tendiwa.existence.NoStimuliAspectKind
@@ -12,10 +14,6 @@ import org.tendiwa.plane.grid.segments.GridSegment
 import org.tendiwa.plane.grid.tiles.distanceTo
 import org.tendiwa.plane.grid.tiles.neighbors
 import org.tendiwa.time.*
-import org.tendiwa.world.Reality
-import org.tendiwa.world.Voxel
-import org.tendiwa.world.realThing.things
-import org.tendiwa.world.realThing.viewOfArea
 
 class HumanoidIntelligence : NoReactionAspect(kind), Actor<Reality> {
     companion object {
@@ -72,7 +70,7 @@ class HumanoidIntelligence : NoReactionAspect(kind), Actor<Reality> {
                 .viewOfArea(
                     centeredGridRectangle(
                         host.position.tile,
-                        NPCVision.VISION_RANGE
+                        NPCVision.Companion.VISION_RANGE
                     )
                 )
                 .things

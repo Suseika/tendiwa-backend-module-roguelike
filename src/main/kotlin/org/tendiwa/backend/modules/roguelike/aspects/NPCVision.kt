@@ -1,5 +1,10 @@
 package org.tendiwa.backend.modules.roguelike.aspects
 
+import org.tendiwa.backend.space.Reality
+import org.tendiwa.backend.space.chunks.chunkWithTile
+import org.tendiwa.backend.space.chunks.get
+import org.tendiwa.backend.space.lighting.lighting
+import org.tendiwa.backend.space.transparency.transparency
 import org.tendiwa.collections.withoutLast
 import org.tendiwa.existence.NoReactionAspect
 import org.tendiwa.existence.NoStimuliAspectKind
@@ -7,11 +12,6 @@ import org.tendiwa.plane.grid.constructors.centeredGridRectangle
 import org.tendiwa.plane.grid.constructors.segmentTo
 import org.tendiwa.plane.grid.dimensions.by
 import org.tendiwa.plane.grid.masks.contains
-import org.tendiwa.world.Reality
-import org.tendiwa.world.chunks.chunkWithTile
-import org.tendiwa.world.chunks.get
-import org.tendiwa.world.lighting.lighting
-import org.tendiwa.world.transparency.transparency
 
 class NPCVision : NoReactionAspect(kind) {
     companion object {

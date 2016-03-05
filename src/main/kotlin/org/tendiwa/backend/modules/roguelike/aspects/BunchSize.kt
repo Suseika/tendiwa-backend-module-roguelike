@@ -1,5 +1,6 @@
 package org.tendiwa.backend.modules.roguelike.aspects
 
+import org.tendiwa.backend.space.Reality
 import org.tendiwa.existence.NoReactionAspect
 import org.tendiwa.existence.NoStimuliAspectKind
 import org.tendiwa.existence.RealThing
@@ -20,7 +21,7 @@ class BunchSize(
         val kind = NoStimuliAspectKind()
     }
 
-    fun changeAmount(reality: org.tendiwa.world.Reality, delta: Int) {
+    fun changeAmount(reality: Reality, delta: Int) {
         val old = amount
         amount += delta
         reality.sendStimulus(

@@ -1,8 +1,8 @@
 package org.tendiwa.backend.modules.roguelike.archetypes
 
-import aspects.HumanoidIntelligence
-import aspects.Inventory
+import org.tendiwa.backend.modules.roguelike.aspects.HumanoidIntelligence
 import org.tendiwa.backend.modules.roguelike.aspects.Equipment
+import org.tendiwa.backend.modules.roguelike.aspects.Inventory
 
 interface Humanoid : Character {
     val equipment: Equipment

@@ -1,11 +1,11 @@
 package org.tendiwa.backend.modules.roguelike.aspects
 
+import org.tendiwa.backend.space.Reality
 import org.tendiwa.existence.NoReactionAspect
 import org.tendiwa.existence.NoStimuliAspectKind
 import org.tendiwa.existence.RealThing
 import org.tendiwa.stimuli.Stimulus
 import org.tendiwa.stimuli.StimulusKind
-import org.tendiwa.world.Reality
 
 class Health(
     private var hitpoints: Int
