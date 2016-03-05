@@ -8,11 +8,11 @@
         <artifactId>parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>backend-module-roguelike</artifactId>
+    <artifactId>backend-plugin-roguelike</artifactId>
     <packaging>jar</packaging>
 
-    <name>tendiwa-backend-module-roguelike</name>
-    <description>Backend module for Tendiwa with definitions of
+    <name>tendiwa-backend-plugin-roguelike</name>
+    <description>Backend plugin for Tendiwa with definitions of
         the most basic things for a roguelike: characters, items,
         mechanics like inventory and equipment etc.</description>
 
@@ -24,7 +24,7 @@
         </dependency>
         <dependency>
             <groupId>org.tendiwa</groupId>
-            <artifactId>world</artifactId>
+            <artifactId>backend-space</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
