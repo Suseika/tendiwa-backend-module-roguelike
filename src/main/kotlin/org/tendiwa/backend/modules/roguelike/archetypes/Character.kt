@@ -1,6 +1,9 @@
 package org.tendiwa.backend.modules.roguelike.archetypes
 
-import org.tendiwa.backend.modules.roguelike.aspects.*
+import org.tendiwa.backend.modules.roguelike.aspects.Health
+import org.tendiwa.backend.modules.roguelike.aspects.NPCVision
+import org.tendiwa.backend.modules.roguelike.aspects.Weight
+import org.tendiwa.backend.space.aspects.Name
 import org.tendiwa.backend.space.aspects.Position
 
 interface Character {
