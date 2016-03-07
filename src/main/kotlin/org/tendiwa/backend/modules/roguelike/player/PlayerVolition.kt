@@ -1,6 +1,6 @@
 package org.tendiwa.backend.modules.roguelike.player
 
-import org.tendiwa.backend.modules.roguelike.aspects.position
+import org.tendiwa.backend.space.aspects.position
 import org.tendiwa.backend.space.Reality
 import org.tendiwa.backend.space.Voxel
 import org.tendiwa.existence.NoReactionAspect

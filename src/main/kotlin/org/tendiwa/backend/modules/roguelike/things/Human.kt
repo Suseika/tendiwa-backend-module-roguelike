@@ -3,7 +3,7 @@ package org.tendiwa.backend.modules.roguelike.things
 import org.tendiwa.backend.modules.roguelike.archetypes.Humanoid
 import org.tendiwa.backend.modules.roguelike.aspects.Health
 import org.tendiwa.backend.modules.roguelike.aspects.Name
-import org.tendiwa.backend.modules.roguelike.aspects.Position
+import org.tendiwa.backend.space.aspects.Position
 import org.tendiwa.backend.modules.roguelike.aspects.Weight
 import org.tendiwa.existence.RealThing
 

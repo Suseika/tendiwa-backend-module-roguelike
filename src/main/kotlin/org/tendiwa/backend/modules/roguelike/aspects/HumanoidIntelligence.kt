@@ -3,7 +3,8 @@ package org.tendiwa.backend.modules.roguelike.aspects
 import org.tendiwa.backend.modules.roguelike.archetypes.Character
 import org.tendiwa.backend.space.Reality
 import org.tendiwa.backend.space.Voxel
-import org.tendiwa.backend.space.realThing.things
+import org.tendiwa.backend.space.aspects.position
+import org.tendiwa.backend.space.realThing.realThing
 import org.tendiwa.backend.space.realThing.viewOfArea
 import org.tendiwa.collections.randomElement
 import org.tendiwa.existence.NoReactionAspect
@@ -66,7 +67,7 @@ class HumanoidIntelligence : NoReactionAspect(kind), Actor<Reality> {
             )
 
         fun closestEnemy(): Character? =
-            context.space.things
+            context.space.realThing
                 .viewOfArea(
                     centeredGridRectangle(
                         host.position.tile,
