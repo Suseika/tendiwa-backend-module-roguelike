@@ -2,6 +2,7 @@ package org.tendiwa.backend.modules.roguelike.aspects
 
 import org.tendiwa.existence.NoReactionAspect
 import org.tendiwa.existence.NoStimuliAspectKind
+import org.tendiwa.existence.RealThing
 
 class Name(
     string: String
@@ -17,3 +18,6 @@ class Name(
             field = value
         }
 }
+
+val RealThing.name: Name
+    get() = aspects[Name.kind] as Name
