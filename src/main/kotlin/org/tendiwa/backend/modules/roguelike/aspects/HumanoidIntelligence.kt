@@ -9,6 +9,7 @@ import org.tendiwa.backend.space.realThing.viewOfArea
 import org.tendiwa.collections.randomElement
 import org.tendiwa.existence.NoReactionAspect
 import org.tendiwa.existence.NoStimuliAspectKind
+import org.tendiwa.existence.RealThing
 import org.tendiwa.plane.grid.constructors.centeredGridRectangle
 import org.tendiwa.plane.grid.metrics.GridMetric
 import org.tendiwa.plane.grid.segments.GridSegment
@@ -23,17 +24,17 @@ class HumanoidIntelligence : NoReactionAspect(kind), Actor<Reality> {
 
     override fun act(context: Reality): Activity {
         val host = context.hostOf(this)
-        fun attack(enemy: Character): Activity =
+        fun attack(target: RealThing): Activity =
             Activity(
                 listOf(
                     ActivityProcess(1, ActivityResult {
-                        enemy.health.change(context, -1)
+                        target.health.change(context, -1)
                     }),
                     Cooldown(1)
                 )
             )
 
-        fun walkTowards(character: Character): Activity =
+        fun walkTowards(target: RealThing): Activity =
             Activity(
                 listOf(
                     ActivityProcess(1, ActivityResult {
@@ -41,7 +42,7 @@ class HumanoidIntelligence : NoReactionAspect(kind), Actor<Reality> {
                             context,
                             GridSegment(
                                 host.position.tile,
-                                character.position.tile
+                                target.position.tile
                             )
                                 .tilesList[1]
                                 .let { Voxel(it, host.position.voxel.z) }
@@ -66,18 +67,17 @@ class HumanoidIntelligence : NoReactionAspect(kind), Actor<Reality> {
                 )
             )
 
-        fun closestEnemy(): Character? =
+        fun closestEnemy(): RealThing? =
             context.space.realThings
                 .viewOfArea(
                     centeredGridRectangle(
                         host.position.tile,
-                        NPCVision.Companion.VISION_RANGE
+                        NPCVision.VISION_RANGE
                     )
                 )
                 .things
                 .filter { it is Character }
                 .minBy { it.position.tile.distanceTo(host.position.tile) }
-                as Character?
 
         val closestEnemy = closestEnemy()
         return if (closestEnemy != null) {
