@@ -2,8 +2,9 @@ package org.tendiwa.backend.modules.roguelike.aspects
 
 import org.tendiwa.backend.modules.roguelike.archetypes.UniqueItem
 import org.tendiwa.backend.space.Reality
-import org.tendiwa.existence.AspectKind
+import org.tendiwa.existence.NoInitAspect
 import org.tendiwa.existence.NoReactionAspect
+import org.tendiwa.existence.NoStimuliAspect
 import org.tendiwa.existence.RealThing
 import org.tendiwa.stimuli.Stimulus
 import org.tendiwa.tools.argumentsConstraint
@@ -11,11 +12,7 @@ import java.util.*
 
 class Equipment(
     slots: List<Equipment.Slot>
-) : NoReactionAspect(Equipment.Companion.kind) {
-    companion object {
-        val kind = AspectKind(listOf())
-    }
-
+) : NoReactionAspect, NoInitAspect, NoStimuliAspect {
     private val worn =
         slots
             .map { Pair(it, Equipment.SlotContent()) }

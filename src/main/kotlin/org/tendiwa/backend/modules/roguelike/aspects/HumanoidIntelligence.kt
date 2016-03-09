@@ -7,8 +7,9 @@ import org.tendiwa.backend.space.aspects.position
 import org.tendiwa.backend.space.realThing.realThings
 import org.tendiwa.backend.space.realThing.viewOfArea
 import org.tendiwa.collections.randomElement
+import org.tendiwa.existence.NoInitAspect
 import org.tendiwa.existence.NoReactionAspect
-import org.tendiwa.existence.NoStimuliAspectKind
+import org.tendiwa.existence.NoStimuliAspect
 import org.tendiwa.existence.RealThing
 import org.tendiwa.plane.grid.constructors.centeredGridRectangle
 import org.tendiwa.plane.grid.metrics.GridMetric
@@ -17,11 +18,8 @@ import org.tendiwa.plane.grid.tiles.distanceTo
 import org.tendiwa.plane.grid.tiles.neighbors
 import org.tendiwa.time.*
 
-class HumanoidIntelligence : NoReactionAspect(kind), Actor<Reality> {
-    companion object {
-        val kind = NoStimuliAspectKind()
-    }
-
+class HumanoidIntelligence
+: NoReactionAspect, NoInitAspect, NoStimuliAspect, Actor<Reality> {
     override fun act(context: Reality): Activity {
         val host = context.hostOf(this)
         fun attack(target: RealThing): Activity =

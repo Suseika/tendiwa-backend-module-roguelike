@@ -4,16 +4,14 @@ import org.tendiwa.backend.modules.roguelike.archetypes.BundleItem
 import org.tendiwa.backend.modules.roguelike.archetypes.Item
 import org.tendiwa.backend.modules.roguelike.archetypes.UniqueItem
 import org.tendiwa.backend.space.Reality
+import org.tendiwa.existence.NoInitAspect
 import org.tendiwa.existence.NoReactionAspect
-import org.tendiwa.existence.NoStimuliAspectKind
+import org.tendiwa.existence.NoStimuliAspect
 import org.tendiwa.existence.RealThing
 import org.tendiwa.stimuli.Stimulus
 import java.util.*
 
-class Inventory() : NoReactionAspect(kind) {
-    companion object {
-        val kind = NoStimuliAspectKind()
-    }
+class Inventory() : NoReactionAspect, NoInitAspect, NoStimuliAspect {
 
     private val items: MutableMap<Class<out Item>, Item> =
         LinkedHashMap()

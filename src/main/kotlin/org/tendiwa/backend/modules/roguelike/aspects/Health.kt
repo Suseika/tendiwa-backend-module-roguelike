@@ -1,18 +1,15 @@
 package org.tendiwa.backend.modules.roguelike.aspects
 
 import org.tendiwa.backend.space.Reality
+import org.tendiwa.existence.NoInitAspect
 import org.tendiwa.existence.NoReactionAspect
-import org.tendiwa.existence.NoStimuliAspectKind
+import org.tendiwa.existence.NoStimuliAspect
 import org.tendiwa.existence.RealThing
 import org.tendiwa.stimuli.Stimulus
 
 class Health(
     private var hitpoints: Int
-) : NoReactionAspect(Health.Companion.kind) {
-    companion object {
-        val kind = NoStimuliAspectKind()
-    }
-
+) : NoReactionAspect, NoStimuliAspect, NoInitAspect {
     private val maxHitpoints: Int = hitpoints
 
     fun change(reality: Reality, delta: Int) {
@@ -36,4 +33,4 @@ class Health(
 }
 
 val RealThing.health: Health
-    get() = aspects[Health.Companion.kind] as Health
+    get() = aspects[Health::class.java] as Health
