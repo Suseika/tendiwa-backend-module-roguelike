@@ -5,7 +5,6 @@ import org.tendiwa.existence.NoReactionAspect
 import org.tendiwa.existence.NoStimuliAspectKind
 import org.tendiwa.existence.RealThing
 import org.tendiwa.stimuli.Stimulus
-import org.tendiwa.stimuli.StimulusKind
 
 class Health(
     private var hitpoints: Int
@@ -28,15 +27,12 @@ class Health(
         )
     }
 
-    class Change(
+    data class Change
+    internal constructor(
         val host: RealThing,
         val old: Int,
         val new: Int
-    ) : Stimulus(kind) {
-        companion object {
-            val kind = StimulusKind("health_change")
-        }
-    }
+    ) : Stimulus
 }
 
 val RealThing.health: Health

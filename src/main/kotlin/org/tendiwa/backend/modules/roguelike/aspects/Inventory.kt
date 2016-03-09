@@ -8,7 +8,6 @@ import org.tendiwa.existence.NoReactionAspect
 import org.tendiwa.existence.NoStimuliAspectKind
 import org.tendiwa.existence.RealThing
 import org.tendiwa.stimuli.Stimulus
-import org.tendiwa.stimuli.StimulusKind
 import java.util.*
 
 class Inventory() : NoReactionAspect(kind) {
@@ -69,21 +68,15 @@ class Inventory() : NoReactionAspect(kind) {
         }
     }
 
-    class Store(
+    data class Store
+    internal constructor(
         val host: RealThing,
         val item: Item
-    ) : Stimulus(kind) {
-        companion object {
-            val kind = StimulusKind("inventory_store")
-        }
-    }
+    ) : Stimulus
 
-    class Lose(
+    data class Lose
+    internal constructor(
         val host: RealThing,
         val item: Item
-    ) : Stimulus(kind) {
-        companion object {
-            val kind = StimulusKind("inventory_lose")
-        }
-    }
+    ) : Stimulus
 }

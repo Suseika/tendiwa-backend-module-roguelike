@@ -6,7 +6,6 @@ import org.tendiwa.existence.AspectKind
 import org.tendiwa.existence.NoReactionAspect
 import org.tendiwa.existence.RealThing
 import org.tendiwa.stimuli.Stimulus
-import org.tendiwa.stimuli.StimulusKind
 import org.tendiwa.tools.argumentsConstraint
 import java.util.*
 
@@ -108,23 +107,17 @@ class Equipment(
             _item != null
     }
 
-    class Equip(
+    data class Equip
+    internal constructor(
         val host: RealThing,
         val slot: Equipment.Slot,
         val item: UniqueItem
-    ) : Stimulus(kind) {
-        companion object {
-            val kind = StimulusKind("equip")
-        }
-    }
+    ) : Stimulus
 
-    class Unequip(
+    data class Unequip
+    internal constructor(
         val host: RealThing,
         val slot: Equipment.Slot,
         val item: UniqueItem
-    ) : Stimulus(kind) {
-        companion object {
-            val kind = StimulusKind("unequip")
-        }
-    }
+    ) : Stimulus
 }

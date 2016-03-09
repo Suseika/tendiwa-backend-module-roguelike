@@ -5,7 +5,6 @@ import org.tendiwa.existence.NoReactionAspect
 import org.tendiwa.existence.NoStimuliAspectKind
 import org.tendiwa.existence.RealThing
 import org.tendiwa.stimuli.Stimulus
-import org.tendiwa.stimuli.StimulusKind
 
 class BunchSize(
     amount: Int
@@ -33,13 +32,10 @@ class BunchSize(
         )
     }
 
-    class Change(
+    data class Change
+    internal constructor(
         val host: RealThing,
         val old: Int,
         val new: Int
-    ) : Stimulus(kind) {
-        companion object {
-            val kind = StimulusKind("bunch_size_change")
-        }
-    }
+    ) : Stimulus
 }
