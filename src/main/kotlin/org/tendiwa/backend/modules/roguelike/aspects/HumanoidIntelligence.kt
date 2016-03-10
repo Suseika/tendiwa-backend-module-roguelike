@@ -1,25 +1,22 @@
 package org.tendiwa.backend.modules.roguelike.aspects
 
+import org.tendiwa.backend.existence.Aspect
+import org.tendiwa.backend.existence.RealThing
 import org.tendiwa.backend.modules.roguelike.archetypes.Character
 import org.tendiwa.backend.space.Reality
 import org.tendiwa.backend.space.Voxel
 import org.tendiwa.backend.space.aspects.position
 import org.tendiwa.backend.space.realThing.realThings
 import org.tendiwa.backend.space.realThing.viewOfArea
+import org.tendiwa.backend.time.*
 import org.tendiwa.collections.randomElement
-import org.tendiwa.existence.NoInitAspect
-import org.tendiwa.existence.NoReactionAspect
-import org.tendiwa.existence.NoStimuliAspect
-import org.tendiwa.existence.RealThing
 import org.tendiwa.plane.grid.constructors.centeredGridRectangle
 import org.tendiwa.plane.grid.metrics.GridMetric
 import org.tendiwa.plane.grid.segments.GridSegment
 import org.tendiwa.plane.grid.tiles.distanceTo
 import org.tendiwa.plane.grid.tiles.neighbors
-import org.tendiwa.time.*
 
-class HumanoidIntelligence
-: NoReactionAspect, NoInitAspect, NoStimuliAspect, Actor<Reality> {
+class HumanoidIntelligence : Aspect, Actor<Reality> {
     override fun act(context: Reality): Activity {
         val host = context.hostOf(this)
         fun attack(target: RealThing): Activity =

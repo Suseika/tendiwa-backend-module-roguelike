@@ -1,14 +1,12 @@
 package org.tendiwa.backend.modules.roguelike.aspects
 
-import org.tendiwa.existence.NoInitAspect
-import org.tendiwa.existence.NoReactionAspect
-import org.tendiwa.existence.NoStimuliAspect
+import org.tendiwa.backend.existence.Aspect
 import org.tendiwa.tools.argumentConstraint
 
 
 class Weight(
     var units: Int = 0
-) : NoReactionAspect, NoInitAspect, NoStimuliAspect {
+) : Aspect {
     init {
         argumentConstraint(
             units,

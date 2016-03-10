@@ -1,9 +1,9 @@
 package org.tendiwa.backend.modules.roguelike.archetypes
 
+import org.tendiwa.backend.existence.RealThing
 import org.tendiwa.backend.modules.roguelike.aspects.Equipment
 import org.tendiwa.backend.modules.roguelike.aspects.HumanoidIntelligence
 import org.tendiwa.backend.modules.roguelike.aspects.Inventory
-import org.tendiwa.existence.RealThing
 
 interface Humanoid : Character {
     fun initHumanoid(realThing: RealThing) {

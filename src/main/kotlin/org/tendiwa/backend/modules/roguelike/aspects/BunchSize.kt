@@ -1,15 +1,13 @@
 package org.tendiwa.backend.modules.roguelike.aspects
 
+import org.tendiwa.backend.existence.Aspect
+import org.tendiwa.backend.existence.RealThing
+import org.tendiwa.backend.existence.Stimulus
 import org.tendiwa.backend.space.Reality
-import org.tendiwa.existence.NoInitAspect
-import org.tendiwa.existence.NoReactionAspect
-import org.tendiwa.existence.NoStimuliAspect
-import org.tendiwa.existence.RealThing
-import org.tendiwa.stimuli.Stimulus
 
 class BunchSize(
     amount: Int
-) : NoReactionAspect, NoStimuliAspect, NoInitAspect {
+) : Aspect {
     var amount: Int =
         amount
         get() = field

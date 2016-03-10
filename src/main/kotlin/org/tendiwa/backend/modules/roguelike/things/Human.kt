@@ -1,11 +1,11 @@
 package org.tendiwa.backend.modules.roguelike.things
 
+import org.tendiwa.backend.existence.RealThing
 import org.tendiwa.backend.modules.roguelike.archetypes.Humanoid
 import org.tendiwa.backend.modules.roguelike.aspects.Health
 import org.tendiwa.backend.modules.roguelike.aspects.Weight
 import org.tendiwa.backend.space.aspects.Name
 import org.tendiwa.backend.space.aspects.Position
-import org.tendiwa.existence.RealThing
 
 class Human(
     position: Position,
