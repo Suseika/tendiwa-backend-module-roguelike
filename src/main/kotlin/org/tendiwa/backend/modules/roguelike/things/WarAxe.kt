@@ -1,13 +1,13 @@
 package org.tendiwa.backend.modules.roguelike.things
 
+import org.tendiwa.backend.existence.AbstractRealThing
 import org.tendiwa.backend.existence.DeclaredAspect
-import org.tendiwa.backend.existence.RealThing
 import org.tendiwa.backend.modules.roguelike.archetypes.UniqueItem
 import org.tendiwa.backend.modules.roguelike.aspects.Volume
 import org.tendiwa.backend.modules.roguelike.aspects.Weight
 import org.tendiwa.backend.space.aspects.Name
 
-class WarAxe() : RealThing(), UniqueItem {
+class WarAxe() : AbstractRealThing(), UniqueItem {
     @DeclaredAspect
     override fun name() = Name("war_axe")
 

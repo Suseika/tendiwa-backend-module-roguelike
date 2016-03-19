@@ -25,34 +25,32 @@ class Inventory() : Aspect {
         if (item is UniqueItem) {
             items.put(item.javaClass, item)
         } else if (item is BundleItem) {
-            (items[item.javaClass]!! as RealThing)
+            items[item.javaClass]!!
                 .bunchSize.changeAmount(
                 reality,
-                (item as RealThing).bunchSize.amount
+                item.bunchSize.amount
             )
         }
     }
 
     fun remove(reality: Reality, item: Item) {
-        if (item is RealThing) {
-            if (!items.containsKey((item as Item).javaClass)) {
+        if (!items.containsKey(item.javaClass)) {
                 throw IllegalArgumentException(
                     "Item $item is not present in Inventory"
                 )
             }
             if (item is UniqueItem) {
-
                 items.put(item.javaClass, item)
             } else if (item is BundleItem) {
-                val inInventory = items[(item as Item).javaClass]!! as RealThing
+                val inInventory = items[item.javaClass]!!
                 val currentAmount = inInventory.bunchSize.amount
                 val removedAmount = item.bunchSize.amount
                 if (currentAmount == removedAmount) {
-                    items.remove((item as Item).javaClass)
+                    items.remove(item.javaClass)
                     reality.sendStimulus(
                         Inventory.Lose(
                             host = reality.hostOf(this),
-                            item = inInventory as Item
+                            item = inInventory
                         )
                     )
                 } else if (currentAmount > removedAmount) {
@@ -61,13 +59,12 @@ class Inventory() : Aspect {
                 } else {
                     assert(currentAmount < removedAmount)
                     throw IllegalArgumentException(
-                        "There are $currentAmount ${(item as RealThing).name.string}s" +
+                        "There are $currentAmount ${item.name.string}s" +
                             " in inventory, and you are trying to remove " +
                             "$removedAmount"
                     )
                 }
             }
-        }
     }
 
     data class Store

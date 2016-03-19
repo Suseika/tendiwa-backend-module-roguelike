@@ -1,6 +1,6 @@
 package org.tendiwa.backend.modules.roguelike.things
 
-import org.tendiwa.backend.existence.RealThing
+import org.tendiwa.backend.existence.AbstractRealThing
 import org.tendiwa.backend.modules.roguelike.archetypes.Humanoid
 import org.tendiwa.backend.modules.roguelike.aspects.Health
 import org.tendiwa.backend.modules.roguelike.aspects.Weight
@@ -12,7 +12,7 @@ class Human(
     personalName: Name,
     weight: Weight,
     health: Health
-) : RealThing(
+) : AbstractRealThing(
     position,
     personalName,
     weight,
