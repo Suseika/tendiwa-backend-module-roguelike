@@ -12,12 +12,9 @@ class Human(
     personalName: Name,
     weight: Weight,
     health: Health
-) : RealThing(), Humanoid {
-    init {
-        addAspect(position)
-        addAspect(personalName)
-        addAspect(weight)
-        addAspect(health)
-        initHumanoid(this)
-    }
-}
+) : RealThing(
+    position,
+    personalName,
+    weight,
+    health
+), Humanoid

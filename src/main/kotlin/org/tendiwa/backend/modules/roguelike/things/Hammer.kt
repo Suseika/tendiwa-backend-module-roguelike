@@ -8,8 +8,8 @@ import org.tendiwa.backend.space.aspects.Name
 
 class Hammer : RealThing(), UniqueItem by Hammer.Prototype {
     private companion object Prototype : UniqueItem {
-        override val weight = Weight(10)
-        override val volume = Volume(10)
-        override val name = Name("hammer")
+        override fun weight() = Weight(10)
+        override fun volume() = Volume(10)
+        override fun name() = Name("hammer")
     }
 }
