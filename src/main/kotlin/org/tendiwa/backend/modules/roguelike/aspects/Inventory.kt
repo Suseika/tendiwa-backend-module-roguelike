@@ -12,59 +12,89 @@ import java.util.*
 
 class Inventory() : Aspect {
 
-    private val items: MutableMap<Class<out Item>, Item> =
+    private val bundleItems: MutableMap<Class<out BundleItem>, BundleItem> =
         LinkedHashMap()
 
+    private val uniqueItems: MutableSet<UniqueItem> =
+        LinkedHashSet()
+
+    /**
+     * [UniqueItems][UniqueItem] and [BundleItems][BundleItem] in this
+     * inventory.
+     */
+    val items: Collection<Item>
+        get() = bundleItems.values + uniqueItems
 
     fun store(reality: Reality, item: Item) {
-        if (items.containsKey(item.javaClass)) {
-            throw IllegalArgumentException(
-                "Item $item is already present in Inventory"
-            )
-        }
         if (item is UniqueItem) {
-            items.put(item.javaClass, item)
+            if (uniqueItems.contains(item)) {
+                throw IllegalArgumentException(
+                    "Item $item is already present in Inventory"
+                )
+            }
+            uniqueItems.add(item)
         } else if (item is BundleItem) {
-            items[item.javaClass]!!
-                .bunchSize.changeAmount(
-                reality,
-                item.bunchSize.amount
+            if (bundleItems.containsKey(item.javaClass)) {
+                bundleItems[item.javaClass]!!
+                    .bunchSize
+                    .changeAmount(
+                        reality,
+                        item.bunchSize.amount
+                    )
+            } else {
+                bundleItems.put(item.javaClass, item)
+            }
+        } else {
+            throw IllegalArgumentException(
+                "Only UniqueItem or BundleItem can be stored in inventory"
             )
         }
+        reality.sendStimulus(
+            Store(
+                host = reality.hostOf(this),
+                item = item
+            )
+        )
     }
 
     fun remove(reality: Reality, item: Item) {
-        if (!items.containsKey(item.javaClass)) {
+        if (item is UniqueItem) {
+            if (!uniqueItems.contains(item)) {
                 throw IllegalArgumentException(
                     "Item $item is not present in Inventory"
                 )
             }
-            if (item is UniqueItem) {
-                items.put(item.javaClass, item)
-            } else if (item is BundleItem) {
-                val inInventory = items[item.javaClass]!!
-                val currentAmount = inInventory.bunchSize.amount
-                val removedAmount = item.bunchSize.amount
-                if (currentAmount == removedAmount) {
-                    items.remove(item.javaClass)
-                    reality.sendStimulus(
-                        Inventory.Lose(
-                            host = reality.hostOf(this),
-                            item = inInventory
-                        )
+            uniqueItems.remove(item)
+            reality.sendStimulus(
+                Lose(
+                    host = reality.hostOf(this),
+                    item = item
+                )
+            )
+        } else if (item is BundleItem) {
+            val inInventory = bundleItems[item.javaClass]!!
+            val currentAmount = inInventory.bunchSize.amount
+            val removedAmount = item.bunchSize.amount
+            if (currentAmount == removedAmount) {
+                bundleItems.remove(item.javaClass)
+                reality.sendStimulus(
+                    Inventory.Lose(
+                        host = reality.hostOf(this),
+                        item = inInventory
                     )
-                } else if (currentAmount > removedAmount) {
-                    inInventory
-                        .bunchSize.changeAmount(reality, -removedAmount)
-                } else {
-                    assert(currentAmount < removedAmount)
-                    throw IllegalArgumentException(
-                        "There are $currentAmount ${item.name.string}s" +
-                            " in inventory, and you are trying to remove " +
-                            "$removedAmount"
-                    )
-                }
+                )
+            } else if (currentAmount > removedAmount) {
+                inInventory
+                    .bunchSize.changeAmount(reality, -removedAmount)
+            } else {
+                assert(currentAmount < removedAmount)
+                throw IllegalArgumentException(
+                    "There are $currentAmount ${item.name.string}s" +
+                        " in inventory, and you are trying to remove " +
+                        "$removedAmount"
+                )
             }
+        }
     }
 
     data class Store
