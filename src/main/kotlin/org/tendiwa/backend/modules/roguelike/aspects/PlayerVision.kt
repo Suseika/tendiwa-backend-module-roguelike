@@ -1,6 +1,6 @@
 package org.tendiwa.backend.modules.roguelike.aspects
 
-import org.tendiwa.backend.existence.Aspect
+import org.tendiwa.backend.existence.AbstractAspect
 import org.tendiwa.backend.existence.RealThing
 import org.tendiwa.backend.existence.Stimulus
 import org.tendiwa.backend.space.Reality
@@ -23,7 +23,7 @@ import org.tendiwa.plane.grid.rectangles.rectangleIntersection
 import org.tendiwa.plane.grid.segments.GridSegment
 import org.tendiwa.plane.grid.tiles.Tile
 
-class PlayerVision : Aspect {
+class PlayerVision : AbstractAspect() {
 
     lateinit var fieldOfView: FieldOfView
 

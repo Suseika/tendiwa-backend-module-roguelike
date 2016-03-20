@@ -1,7 +1,7 @@
 package org.tendiwa.backend.modules.roguelike.aspects
 
-import org.tendiwa.backend.existence.Aspect
+import org.tendiwa.backend.existence.AbstractAspect
 
 class Volume(
     val units: Int
-) : Aspect
+) : AbstractAspect()

@@ -1,6 +1,6 @@
 package org.tendiwa.backend.modules.roguelike.aspects
 
-import org.tendiwa.backend.existence.Aspect
+import org.tendiwa.backend.existence.AbstractAspect
 import org.tendiwa.backend.existence.RealThing
 import org.tendiwa.backend.modules.roguelike.archetypes.Character
 import org.tendiwa.backend.space.Reality
@@ -16,7 +16,7 @@ import org.tendiwa.plane.grid.segments.GridSegment
 import org.tendiwa.plane.grid.tiles.distanceTo
 import org.tendiwa.plane.grid.tiles.neighbors
 
-class HumanoidIntelligence : Aspect, Actor<Reality> {
+class HumanoidIntelligence : AbstractAspect(), Actor<Reality> {
     override fun act(context: Reality): Activity {
         val host = context.hostOf(this)
         fun attack(target: RealThing): Activity =

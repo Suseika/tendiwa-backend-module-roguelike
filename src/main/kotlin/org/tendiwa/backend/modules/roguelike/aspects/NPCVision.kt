@@ -1,6 +1,6 @@
 package org.tendiwa.backend.modules.roguelike.aspects
 
-import org.tendiwa.backend.existence.Aspect
+import org.tendiwa.backend.existence.AbstractAspect
 import org.tendiwa.backend.space.Reality
 import org.tendiwa.backend.space.aspects.Position
 import org.tendiwa.backend.space.aspects.position
@@ -14,7 +14,7 @@ import org.tendiwa.plane.grid.constructors.segmentTo
 import org.tendiwa.plane.grid.dimensions.by
 import org.tendiwa.plane.grid.masks.contains
 
-class NPCVision : Aspect {
+class NPCVision : AbstractAspect() {
     companion object {
         val VISION_RANGE = 21 by 21
     }

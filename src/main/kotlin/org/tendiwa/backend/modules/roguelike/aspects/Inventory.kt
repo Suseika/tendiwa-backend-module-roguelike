@@ -1,5 +1,6 @@
 package org.tendiwa.backend.modules.roguelike.aspects
 
+import org.tendiwa.backend.existence.AbstractAspect
 import org.tendiwa.backend.existence.Aspect
 import org.tendiwa.backend.existence.RealThing
 import org.tendiwa.backend.existence.Stimulus
@@ -11,7 +12,7 @@ import org.tendiwa.backend.space.Reality
 import org.tendiwa.backend.space.aspects.name
 import java.util.*
 
-class Inventory() : Aspect {
+class Inventory() : AbstractAspect() {
 
     private val bundleItems: MutableMap<Class<out BundleItem>, BundleItem> =
         LinkedHashMap()

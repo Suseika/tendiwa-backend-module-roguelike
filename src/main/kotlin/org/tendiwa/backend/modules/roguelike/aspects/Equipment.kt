@@ -1,6 +1,6 @@
 package org.tendiwa.backend.modules.roguelike.aspects
 
-import org.tendiwa.backend.existence.Aspect
+import org.tendiwa.backend.existence.AbstractAspect
 import org.tendiwa.backend.existence.RealThing
 import org.tendiwa.backend.existence.Stimulus
 import org.tendiwa.backend.modules.roguelike.archetypes.UniqueItem
@@ -10,7 +10,7 @@ import java.util.*
 
 class Equipment(
     slots: List<Equipment.Slot>
-) : Aspect {
+) : AbstractAspect() {
 
     private val worn =
         slots

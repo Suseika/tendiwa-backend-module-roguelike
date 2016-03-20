@@ -1,13 +1,13 @@
 package org.tendiwa.backend.modules.roguelike.aspects
 
-import org.tendiwa.backend.existence.Aspect
+import org.tendiwa.backend.existence.AbstractAspect
 import org.tendiwa.backend.existence.RealThing
 import org.tendiwa.backend.existence.Stimulus
 import org.tendiwa.backend.space.Reality
 
 class Health(
     private var hitpoints: Int
-) : Aspect {
+) : AbstractAspect() {
     private val maxHitpoints: Int = hitpoints
 
     fun change(reality: Reality, delta: Int) {
