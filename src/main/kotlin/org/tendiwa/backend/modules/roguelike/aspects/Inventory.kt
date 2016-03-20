@@ -6,6 +6,7 @@ import org.tendiwa.backend.existence.Stimulus
 import org.tendiwa.backend.modules.roguelike.archetypes.BundleItem
 import org.tendiwa.backend.modules.roguelike.archetypes.Item
 import org.tendiwa.backend.modules.roguelike.archetypes.UniqueItem
+import org.tendiwa.backend.modules.roguelike.archetypes.addBundle
 import org.tendiwa.backend.space.Reality
 import org.tendiwa.backend.space.aspects.name
 import java.util.*
@@ -36,11 +37,7 @@ class Inventory() : Aspect {
         } else if (item is BundleItem) {
             if (bundleItems.containsKey(item.javaClass)) {
                 bundleItems[item.javaClass]!!
-                    .bunchSize
-                    .changeAmount(
-                        reality,
-                        item.bunchSize.amount
-                    )
+                    .addBundle(reality, item)
             } else {
                 bundleItems.put(item.javaClass, item)
             }
