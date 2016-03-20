@@ -101,6 +101,27 @@ class InventoryTest {
         }
     }
 
+    @Test
+    fun `removes existing complete bundles`() {
+        val inventory = Inventory()
+        val coins = Coin(BunchSize(10))
+        AspectTestSuite(
+            things = listOf(
+                MockRealThing(inventory),
+                coins
+            )
+        ).apply {
+            inventory.apply {
+                store(reality, coins)
+                remove(reality, coins)
+                assert(items.isEmpty())
+                assert(trappedStimuli.any {
+                    it is Inventory.Lose && it.item == coins
+                })
+            }
+        }
+    }
+
     class Axe : AbstractRealThing(), UniqueItem {
         override fun volume() = Volume(1)
 
