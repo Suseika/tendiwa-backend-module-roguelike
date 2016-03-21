@@ -20,7 +20,7 @@ class BunchSize(
         amount += delta
         reality.sendStimulus(
             BunchSize.Change(
-                reality.hostOf(this),
+                host = host,
                 old = old,
                 new = amount
             )

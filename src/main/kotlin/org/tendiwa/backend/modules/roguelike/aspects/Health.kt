@@ -15,7 +15,7 @@ class Health(
         hitpoints += delta
         reality.sendStimulus(
             Health.Change(
-                reality.hostOf(this),
+                host,
                 old = old,
                 new = hitpoints
             )

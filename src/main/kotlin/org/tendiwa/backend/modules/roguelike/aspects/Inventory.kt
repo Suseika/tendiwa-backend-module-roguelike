@@ -1,7 +1,6 @@
 package org.tendiwa.backend.modules.roguelike.aspects
 
 import org.tendiwa.backend.existence.AbstractAspect
-import org.tendiwa.backend.existence.Aspect
 import org.tendiwa.backend.existence.RealThing
 import org.tendiwa.backend.existence.Stimulus
 import org.tendiwa.backend.modules.roguelike.archetypes.BundleItem
@@ -48,10 +47,7 @@ class Inventory() : AbstractAspect() {
             )
         }
         reality.sendStimulus(
-            Store(
-                host = reality.hostOf(this),
-                item = item
-            )
+            Store(host, item)
         )
     }
 
@@ -64,10 +60,7 @@ class Inventory() : AbstractAspect() {
             }
             uniqueItems.remove(item)
             reality.sendStimulus(
-                Lose(
-                    host = reality.hostOf(this),
-                    item = item
-                )
+                Lose(host, item)
             )
         } else if (item is BundleItem) {
             val inInventory = bundleItems[item.javaClass]!!
@@ -76,10 +69,7 @@ class Inventory() : AbstractAspect() {
             if (currentAmount == removedAmount) {
                 bundleItems.remove(item.javaClass)
                 reality.sendStimulus(
-                    Inventory.Lose(
-                        host = reality.hostOf(this),
-                        item = inInventory
-                    )
+                    Inventory.Lose(host, inInventory)
                 )
             } else if (currentAmount > removedAmount) {
                 inInventory

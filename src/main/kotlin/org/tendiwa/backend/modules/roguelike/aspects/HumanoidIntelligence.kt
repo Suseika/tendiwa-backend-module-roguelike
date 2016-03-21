@@ -18,7 +18,6 @@ import org.tendiwa.plane.grid.tiles.neighbors
 
 class HumanoidIntelligence : AbstractAspect(), Actor<Reality> {
     override fun act(context: Reality): Activity {
-        val host = context.hostOf(this)
         fun attack(target: RealThing): Activity =
             Activity(
                 listOf(

@@ -20,7 +20,7 @@ class NPCVision : AbstractAspect() {
     }
 
     fun canSee(reality: Reality, target: Position): Boolean {
-        reality.hostOf(this).run {
+        host.run {
             val closeEnough =
                 position
                     .tile

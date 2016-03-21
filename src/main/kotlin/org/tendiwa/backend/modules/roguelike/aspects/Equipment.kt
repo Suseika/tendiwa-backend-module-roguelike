@@ -25,7 +25,7 @@ class Equipment(
     fun equip(reality: Reality, slot: Equipment.Slot, item: UniqueItem) {
         validateAllowedSlot(slot)
         worn[slot]!!.occupyWith(item)
-        reality.sendStimulus(Equipment.Equip(reality.hostOf(this), slot, item))
+        reality.sendStimulus(Equipment.Equip(host, slot, item))
     }
 
     /**
@@ -38,7 +38,7 @@ class Equipment(
         val content = worn[slot]!!
         val item = content.item
         content.free()
-        reality.sendStimulus(Equipment.Unequip(reality.hostOf(this), slot, item))
+        reality.sendStimulus(Equipment.Unequip(host, slot, item))
     }
 
     private fun validateAllowedSlot(slot: Equipment.Slot) {

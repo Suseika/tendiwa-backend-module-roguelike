@@ -31,7 +31,6 @@ class PlayerVision : AbstractAspect() {
         get() = listOf(Position.Change::class.java)
 
     override fun reaction(reality: Reality, stimulus: Stimulus) {
-        val host = reality.hostOf(this)
         if (
         stimulus is Position.Change
             && stimulus.host == host
