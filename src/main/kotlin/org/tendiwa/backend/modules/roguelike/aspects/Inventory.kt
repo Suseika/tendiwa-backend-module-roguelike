@@ -97,3 +97,6 @@ class Inventory() : AbstractAspect() {
         val item: Item
     ) : Stimulus
 }
+
+val RealThing.inventory: Inventory
+    get() = aspects[Inventory::class.java] as Inventory
