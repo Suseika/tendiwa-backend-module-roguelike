@@ -11,11 +11,9 @@ interface BundleItem : Item {
     @DeclaredAspect
     fun bunchSize(): BunchSize
 
-    @DeclaredAspect
-    fun unitWeight(): Weight
+    fun unitWeight(): Int
 
-    @DeclaredAspect
-    fun unitVolume(): Volume
+    fun unitVolume(): Int
 
     @DeclaredAspect
     fun weight(): Weight

@@ -139,9 +139,9 @@ class InventoryTest {
 
         override fun weight() = Weight(1)
 
-        override fun unitVolume() = Volume(1)
+        override fun unitVolume() = 1
 
-        override fun unitWeight() = Weight(1)
+        override fun unitWeight() = 1
 
         override fun bunchSize() = parameterAspect<BunchSize>()
     }
