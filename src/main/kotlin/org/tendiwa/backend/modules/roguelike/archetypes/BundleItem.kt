@@ -1,10 +1,10 @@
 package org.tendiwa.backend.modules.roguelike.archetypes
 
 import org.tendiwa.backend.existence.DeclaredAspect
+import org.tendiwa.backend.existence.aspect
 import org.tendiwa.backend.modules.roguelike.aspects.BunchSize
 import org.tendiwa.backend.modules.roguelike.aspects.Volume
 import org.tendiwa.backend.modules.roguelike.aspects.Weight
-import org.tendiwa.backend.modules.roguelike.aspects.bunchSize
 import org.tendiwa.backend.space.Reality
 
 interface BundleItem : Item {
@@ -37,9 +37,9 @@ fun BundleItem.addBundle(reality: Reality, added: BundleItem) {
                 "to a bundle of type ${this.javaClass}"
         )
     }
-    this.bunchSize
+    this.aspect<BunchSize>()
         .changeAmount(
             reality,
-            added.bunchSize.amount
+            added.aspect<BunchSize>().amount
         )
 }

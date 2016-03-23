@@ -29,6 +29,3 @@ class Health(
         val new: Int
     ) : Stimulus
 }
-
-val RealThing.health: Health
-    get() = aspects[Health::class.java] as Health

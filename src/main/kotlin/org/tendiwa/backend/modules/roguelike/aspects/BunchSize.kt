@@ -34,6 +34,3 @@ class BunchSize(
         val new: Int
     ) : Stimulus
 }
-
-val RealThing.bunchSize: BunchSize
-    get() = aspects[BunchSize::class.java] as BunchSize

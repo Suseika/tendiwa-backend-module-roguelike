@@ -1,9 +1,9 @@
 package org.tendiwa.backend.modules.roguelike.aspects
 
 import org.tendiwa.backend.existence.AbstractAspect
+import org.tendiwa.backend.existence.aspect
 import org.tendiwa.backend.space.Reality
 import org.tendiwa.backend.space.aspects.Position
-import org.tendiwa.backend.space.aspects.position
 import org.tendiwa.backend.space.chunks.chunkWithTile
 import org.tendiwa.backend.space.chunks.get
 import org.tendiwa.backend.space.lighting.lighting
@@ -21,13 +21,15 @@ class NPCVision : AbstractAspect() {
 
     fun canSee(reality: Reality, target: Position): Boolean {
         host.run {
+            val position = aspect<Position>()
             val closeEnough =
                 position
                     .tile
                     .let { centeredGridRectangle(it, VISION_RANGE) }
                     .contains(target.tile)
             val isVisible =
-                position.tile
+                position
+                    .tile
                     .segmentTo(target.tile)
                     .tilesList
                     .withoutLast()

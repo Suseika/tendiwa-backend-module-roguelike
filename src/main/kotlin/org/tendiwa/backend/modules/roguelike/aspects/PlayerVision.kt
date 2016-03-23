@@ -3,10 +3,10 @@ package org.tendiwa.backend.modules.roguelike.aspects
 import org.tendiwa.backend.existence.AbstractAspect
 import org.tendiwa.backend.existence.RealThing
 import org.tendiwa.backend.existence.Stimulus
+import org.tendiwa.backend.existence.aspect
 import org.tendiwa.backend.space.Reality
 import org.tendiwa.backend.space.Space
 import org.tendiwa.backend.space.aspects.Position
-import org.tendiwa.backend.space.aspects.position
 import org.tendiwa.backend.space.chunks.chunkWithTile
 import org.tendiwa.backend.space.walls.WallType
 import org.tendiwa.backend.space.walls.walls
@@ -57,7 +57,7 @@ class PlayerVision : AbstractAspect() {
     ): FieldOfView =
         FieldOfView(
             space = reality.space,
-            center = host.position.tile
+            center = host.aspect<Position>().tile
         )
 
     data class Change internal constructor(
@@ -116,6 +116,3 @@ class PlayerVision : AbstractAspect() {
                 .toList()
     }
 }
-
-val RealThing.playerVision: PlayerVision
-    get() = aspects[PlayerVision::class.java]!! as PlayerVision

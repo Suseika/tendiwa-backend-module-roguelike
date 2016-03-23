@@ -3,12 +3,13 @@ package org.tendiwa.backend.modules.roguelike.aspects
 import org.tendiwa.backend.existence.AbstractAspect
 import org.tendiwa.backend.existence.RealThing
 import org.tendiwa.backend.existence.Stimulus
+import org.tendiwa.backend.existence.aspect
 import org.tendiwa.backend.modules.roguelike.archetypes.BundleItem
 import org.tendiwa.backend.modules.roguelike.archetypes.Item
 import org.tendiwa.backend.modules.roguelike.archetypes.UniqueItem
 import org.tendiwa.backend.modules.roguelike.archetypes.addBundle
 import org.tendiwa.backend.space.Reality
-import org.tendiwa.backend.space.aspects.name
+import org.tendiwa.backend.space.aspects.Name
 import java.util.*
 
 class Inventory() : AbstractAspect() {
@@ -64,8 +65,8 @@ class Inventory() : AbstractAspect() {
             )
         } else if (item is BundleItem) {
             val inInventory = bundleItems[item.javaClass]!!
-            val currentAmount = inInventory.bunchSize.amount
-            val removedAmount = item.bunchSize.amount
+            val currentAmount = inInventory.aspect<BunchSize>().amount
+            val removedAmount = item.aspect<BunchSize>().amount
             if (currentAmount == removedAmount) {
                 bundleItems.remove(item.javaClass)
                 reality.sendStimulus(
@@ -73,11 +74,12 @@ class Inventory() : AbstractAspect() {
                 )
             } else if (currentAmount > removedAmount) {
                 inInventory
-                    .bunchSize.changeAmount(reality, -removedAmount)
+                    .aspect<BunchSize>()
+                    .changeAmount(reality, -removedAmount)
             } else {
                 assert(currentAmount < removedAmount)
                 throw IllegalArgumentException(
-                    "There are $currentAmount ${item.name.string}s" +
+                    "There are $currentAmount ${item.aspect<Name>().string}s" +
                         " in inventory, and you are trying to remove " +
                         "$removedAmount"
                 )
@@ -97,6 +99,3 @@ class Inventory() : AbstractAspect() {
         val item: Item
     ) : Stimulus
 }
-
-val RealThing.inventory: Inventory
-    get() = aspects[Inventory::class.java] as Inventory
