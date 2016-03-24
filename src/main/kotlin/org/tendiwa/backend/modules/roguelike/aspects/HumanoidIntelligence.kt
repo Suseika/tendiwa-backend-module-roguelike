@@ -15,6 +15,7 @@ import org.tendiwa.plane.grid.constructors.centeredGridRectangle
 import org.tendiwa.plane.grid.metrics.GridMetric
 import org.tendiwa.plane.grid.segments.GridSegment
 import org.tendiwa.plane.grid.tiles.distanceTo
+import org.tendiwa.plane.grid.tiles.isNear
 import org.tendiwa.plane.grid.tiles.neighbors
 
 class HumanoidIntelligence : AbstractAspect(), Actor<Reality> {
@@ -35,7 +36,7 @@ class HumanoidIntelligence : AbstractAspect(), Actor<Reality> {
             Activity(
                 listOf(
                     ActivityProcess(1, ActivityResult {
-                        host.aspect<Position>().move(
+                        host.aspect<Position>().change(
                             context,
                             GridSegment(
                                 host.aspect<Position>().tile,
@@ -59,7 +60,7 @@ class HumanoidIntelligence : AbstractAspect(), Actor<Reality> {
                             .toList()
                             .randomElement(context.random)
                             .let { Voxel(it, host.aspect<Position>().voxel.z) }
-                            .let { host.aspect<Position>().move(context, it) }
+                            .let { host.aspect<Position>().change(context, it) }
                     })
                 )
             )
@@ -78,7 +79,7 @@ class HumanoidIntelligence : AbstractAspect(), Actor<Reality> {
 
         val closestEnemy = closestEnemy()
         return if (closestEnemy != null) {
-            if (closestEnemy.aspect<Position>().isNear(host.aspect<Position>())) {
+            if (closestEnemy.aspect<Position>().tile.isNear(host.aspect<Position>().tile, GridMetric.KING)) {
                 attack(closestEnemy)
             } else {
                 walkTowards(closestEnemy)
