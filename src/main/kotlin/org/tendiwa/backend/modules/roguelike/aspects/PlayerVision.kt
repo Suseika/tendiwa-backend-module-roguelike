@@ -47,7 +47,7 @@ class PlayerVision : AbstractAspect() {
         }
     }
 
-    override fun init(reality: Reality, host: RealThing) {
+    override fun init(reality: Reality) {
         fieldOfView = computeFieldOfView(host, reality)
     }
 
