@@ -7,9 +7,8 @@ import org.tendiwa.backend.existence.aspect
 import org.tendiwa.backend.space.Reality
 import org.tendiwa.backend.space.Space
 import org.tendiwa.backend.space.aspects.Position
-import org.tendiwa.backend.space.chunks.chunkWithTile
+import org.tendiwa.backend.space.chunks.chunkWithVoxel
 import org.tendiwa.backend.space.walls.WallType
-import org.tendiwa.backend.space.walls.walls
 import org.tendiwa.collections.takeUntil
 import org.tendiwa.plane.grid.constructors.centeredGridRectangle
 import org.tendiwa.plane.grid.masks.GridMask
@@ -57,7 +56,8 @@ class PlayerVision : AbstractAspect() {
     ): FieldOfView =
         FieldOfView(
             space = reality.space,
-            center = host.aspect<Position>().tile
+            center = host.aspect<Position>().tile,
+            z = host.aspect<Position>().voxel.z
         )
 
     data class Change internal constructor(
@@ -68,7 +68,8 @@ class PlayerVision : AbstractAspect() {
 
     class FieldOfView(
         space: Space,
-        private val center: Tile
+        private val center: Tile,
+        private val z: Int
     ) {
         private val wallPlane = space.walls
         val hull =
@@ -87,11 +88,13 @@ class PlayerVision : AbstractAspect() {
                 .flatMap {
                     GridSegment(center, it)
                         .tilesList
-                        .takeUntil { !isTileTransparent(it) }
+                        .takeUntil { !isTileTransparent(it, z) }
                 }
 
-        private fun isTileTransparent(tile: Tile): Boolean =
-            wallPlane.chunkWithTile(tile).wallAt(tile) == WallType.void
+        private fun isTileTransparent(tile: Tile, z: Int): Boolean =
+            wallPlane
+                .chunkWithVoxel(tile.x, tile.y, z)
+                .wallAt(tile) == WallType.void
 
         fun difference(new: FieldOfView): VisionDifference =
             VisionDifference(this, new)

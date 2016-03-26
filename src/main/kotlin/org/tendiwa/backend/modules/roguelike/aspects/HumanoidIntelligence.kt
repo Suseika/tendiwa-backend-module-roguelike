@@ -7,7 +7,6 @@ import org.tendiwa.backend.modules.roguelike.archetypes.Character
 import org.tendiwa.backend.space.Reality
 import org.tendiwa.backend.space.Voxel
 import org.tendiwa.backend.space.aspects.Position
-import org.tendiwa.backend.space.realThing.realThings
 import org.tendiwa.backend.space.realThing.viewOfArea
 import org.tendiwa.backend.time.*
 import org.tendiwa.collections.randomElement
@@ -65,17 +64,20 @@ class HumanoidIntelligence : AbstractAspect(), Actor<Reality> {
                 )
             )
 
-        fun closestEnemy(): RealThing? =
-            context.space.realThings
+        fun closestEnemy(): RealThing? {
+            val position = host.aspect<Position>()
+            return context.space.realThings
+                .planeAtZ(position.voxel.z)
                 .viewOfArea(
                     centeredGridRectangle(
-                        host.aspect<Position>().tile,
+                        position.tile,
                         NPCVision.VISION_RANGE
                     )
                 )
                 .things
                 .filter { it is Character }
-                .minBy { it.aspect<Position>().tile.distanceTo(host.aspect<Position>().tile) }
+                .minBy { position.tile.distanceTo(position.tile) }
+        }
 
         val closestEnemy = closestEnemy()
         return if (closestEnemy != null) {
