@@ -70,7 +70,7 @@ class PlayerVision : AbstractAspect() {
     class FieldOfView(
         space: Space,
         private val center: Tile,
-        private val z: Int
+        val z: Int
     ) {
         private val wallPlane = space.walls
         val hull =
@@ -109,12 +109,21 @@ class PlayerVision : AbstractAspect() {
         current: FieldOfView
     ) {
         val seen =
-            current.mask.difference(previous.mask)
+            if (current.z == previous.z) {
+                current.mask.difference(previous.mask)
+            } else {
+                current.mask
+            }
                 .boundedBy(current.hull)
                 .tiles
                 .toList()
+
         val unseen =
-            previous.mask.difference(current.mask)
+            if (current.z == previous.z) {
+                previous.mask.difference(current.mask)
+            } else {
+                previous.mask
+            }
                 .boundedBy(previous.hull)
                 .tiles
                 .toList()
