@@ -9,6 +9,7 @@ import org.tendiwa.backend.space.Space
 import org.tendiwa.backend.space.aspects.Position
 import org.tendiwa.backend.space.chunks.chunkWithVoxel
 import org.tendiwa.backend.space.walls.WallType
+import org.tendiwa.backend.yawPlane
 import org.tendiwa.collections.takeUntil
 import org.tendiwa.plane.grid.constructors.centeredGridRectangle
 import org.tendiwa.plane.grid.masks.GridMask
@@ -74,7 +75,7 @@ class PlayerVision : AbstractAspect() {
         private val wallPlane = space.walls
         val hull =
             centeredGridRectangle(center, NPCVision.VISION_RANGE)
-                .rectangleIntersection(space.hull)!!
+                .rectangleIntersection(space.hull.yawPlane)!!
         val mask: GridMask = computeVisionMask()
 
         private fun computeVisionMask(): GridMask =
