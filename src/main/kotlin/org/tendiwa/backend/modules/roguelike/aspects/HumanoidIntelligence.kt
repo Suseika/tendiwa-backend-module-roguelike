@@ -10,7 +10,7 @@ import org.tendiwa.backend.space.aspects.Position
 import org.tendiwa.backend.space.realThing.viewOfArea
 import org.tendiwa.backend.time.Activity
 import org.tendiwa.backend.time.ActivityProcess
-import org.tendiwa.backend.time.Actor
+import org.tendiwa.backend.time.TemporalActor
 import org.tendiwa.backend.time.Cooldown
 import org.tendiwa.collections.randomElement
 import org.tendiwa.plane.grid.constructors.centeredGridRectangle
@@ -20,7 +20,7 @@ import org.tendiwa.plane.grid.tiles.distanceTo
 import org.tendiwa.plane.grid.tiles.isNear
 import org.tendiwa.plane.grid.tiles.neighbors
 
-class HumanoidIntelligence : AbstractAspect(), Actor<Reality> {
+class HumanoidIntelligence : AbstractAspect(), TemporalActor<Reality> {
     override fun act(context: Reality): Activity {
         fun attack(target: RealThing): Activity =
             Activity(
