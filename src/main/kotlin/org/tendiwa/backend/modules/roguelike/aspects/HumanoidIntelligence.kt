@@ -8,7 +8,10 @@ import org.tendiwa.backend.space.Reality
 import org.tendiwa.backend.space.Voxel
 import org.tendiwa.backend.space.aspects.Position
 import org.tendiwa.backend.space.realThing.viewOfArea
-import org.tendiwa.backend.time.*
+import org.tendiwa.backend.time.Activity
+import org.tendiwa.backend.time.ActivityProcess
+import org.tendiwa.backend.time.Actor
+import org.tendiwa.backend.time.Cooldown
 import org.tendiwa.collections.randomElement
 import org.tendiwa.plane.grid.constructors.centeredGridRectangle
 import org.tendiwa.plane.grid.metrics.GridMetric
@@ -22,7 +25,7 @@ class HumanoidIntelligence : AbstractAspect(), Actor<Reality> {
         fun attack(target: RealThing): Activity =
             Activity(
                 listOf(
-                    ActivityProcess(1, ActivityResult {
+                    ActivityProcess(1, {
                         target
                             .aspect<Health>()
                             .change(context, -1)
@@ -34,7 +37,7 @@ class HumanoidIntelligence : AbstractAspect(), Actor<Reality> {
         fun walkTowards(target: RealThing): Activity =
             Activity(
                 listOf(
-                    ActivityProcess(1, ActivityResult {
+                    ActivityProcess(1, {
                         host.aspect<Position>().change(
                             context,
                             GridSegment(
@@ -52,7 +55,7 @@ class HumanoidIntelligence : AbstractAspect(), Actor<Reality> {
         fun wander(): Activity =
             Activity(
                 listOf(
-                    ActivityProcess(1, ActivityResult {
+                    ActivityProcess(1, {
                         host.aspect<Position>().tile
                             .neighbors(GridMetric.KING)
                             .tiles
