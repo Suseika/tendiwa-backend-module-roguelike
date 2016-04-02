@@ -82,7 +82,7 @@ class HumanoidIntelligence : AbstractAspect(), TemporalActor<Reality> {
                     )
                 )
                 .things
-                .filter { it is Character }
+                .filter { it is Character && it != host }
                 .minBy { position.tile.distanceTo(position.tile) }
         }
 
