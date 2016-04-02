@@ -9,6 +9,7 @@ import org.tendiwa.backend.time.Activity
 import org.tendiwa.backend.time.ActivityProcess
 import org.tendiwa.backend.time.TemporalActor
 import org.tendiwa.collections.randomElement
+import org.tendiwa.math.integers.odd
 import org.tendiwa.plane.grid.constructors.centeredGridRectangle
 import org.tendiwa.plane.grid.dimensions.by
 import org.tendiwa.plane.grid.masks.GridMask
@@ -33,6 +34,15 @@ class WandererAI : AbstractAspect(), TemporalActor<Reality> {
 
     private fun wander(reality: Reality): Voxel {
         val center = host.aspect<Position>().tile
+        if (center.x.odd) {
+            return Voxel(center.x + 1, center.y, 0)
+        } else {
+            return Voxel(center.x - 1, center.y, 0)
+        }
+    }
+
+    private fun randomWander(reality: Reality): Voxel {
+        val center = host.aspect<Position>().tile
         return center
             .neighbors(GridMetric.TAXICAB)
             .intersection(
@@ -55,5 +65,4 @@ class WandererAI : AbstractAspect(), TemporalActor<Reality> {
                 }
             }
     }
-
 }
