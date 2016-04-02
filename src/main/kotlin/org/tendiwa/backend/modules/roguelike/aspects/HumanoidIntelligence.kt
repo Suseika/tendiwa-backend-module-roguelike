@@ -10,8 +10,8 @@ import org.tendiwa.backend.space.aspects.Position
 import org.tendiwa.backend.space.realThing.viewOfArea
 import org.tendiwa.backend.time.Activity
 import org.tendiwa.backend.time.ActivityProcess
-import org.tendiwa.backend.time.TemporalActor
 import org.tendiwa.backend.time.Cooldown
+import org.tendiwa.backend.time.TemporalActor
 import org.tendiwa.collections.randomElement
 import org.tendiwa.plane.grid.constructors.centeredGridRectangle
 import org.tendiwa.plane.grid.metrics.GridMetric
@@ -56,13 +56,17 @@ class HumanoidIntelligence : AbstractAspect(), TemporalActor<Reality> {
             Activity(
                 listOf(
                     ActivityProcess(1, {
-                        host.aspect<Position>().tile
-                            .neighbors(GridMetric.KING)
-                            .tiles
-                            .toList()
-                            .randomElement(context.random)
-                            .let { Voxel(it, host.aspect<Position>().voxel.z) }
-                            .let { host.aspect<Position>().change(context, it) }
+                        host.aspect<Position>().change(
+                            context,
+                            host.aspect<Position>().tile
+                                .neighbors(GridMetric.KING)
+                                .tiles
+                                .toList()
+                                .randomElement(context.random)
+                                .let {
+                                    Voxel(it, host.aspect<Position>().voxel.z)
+                                }
+                        )
                     })
                 )
             )
