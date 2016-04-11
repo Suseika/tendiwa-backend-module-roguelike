@@ -8,8 +8,8 @@ import org.tendiwa.backend.existence.aspect
 import org.tendiwa.backend.space.Voxel
 import org.tendiwa.backend.space.aspects.Position
 import org.tendiwa.backend.space.walls.WallType
-import org.tendiwa.backend.testing.AspectTestSuite
 import org.tendiwa.backend.testing.MockRealThing
+import org.tendiwa.backend.testing.inMockReality
 import org.tendiwa.plane.grid.dimensions.by
 import kotlin.test.assertFalse
 
@@ -22,13 +22,13 @@ class PassabilityTest {
             expectMessage("does not have Aspect")
             expectMessage("Position")
         }
-        AspectTestSuite(
+        inMockReality (
             things = listOf(
                 MockRealThing(
                     Passability()
                 )
             )
-        )
+        ) {}
     }
 
     @Test
@@ -37,10 +37,10 @@ class PassabilityTest {
             Position(Voxel(0, 0, 0)),
             Passability()
         )
-        AspectTestSuite(
+        inMockReality (
             size = 2 by 2 by 1,
             things = listOf(thing)
-        ).apply {
+        ) {
             assert(thing.aspect<Passability>().isTilePassable(1, 1))
         }
     }
@@ -51,10 +51,10 @@ class PassabilityTest {
             Position(Voxel(0, 0, 0)),
             Passability()
         )
-        AspectTestSuite(
+        inMockReality (
             size = 2 by 2 by 1,
             things = listOf(thing)
-        ).apply {
+        ) {
             reality.space.walls
                 .planeAtZ(0)
                 .chunkWithTile(1, 1)
@@ -69,9 +69,9 @@ class PassabilityTest {
             Position(Voxel(0, 0, 0)),
             Passability()
         )
-        AspectTestSuite(
+        inMockReality(
             things = listOf(thing)
-        ).apply {
+        ) {
             assertFalse(thing.aspect<Passability>().isTilePassable(-1, -1))
         }
     }
@@ -82,9 +82,9 @@ class PassabilityTest {
             Position(Voxel(0, 0, 0)),
             Passability()
         )
-        AspectTestSuite(
+        inMockReality (
             things = listOf(thing)
-        ).apply {
+        ) {
             reality.space.walls
                 .planeAtZ(0)
                 .chunkWithTile(0, 0)
