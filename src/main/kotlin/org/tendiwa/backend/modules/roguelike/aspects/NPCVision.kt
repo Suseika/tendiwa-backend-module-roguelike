@@ -4,9 +4,6 @@ import org.tendiwa.backend.existence.AbstractAspect
 import org.tendiwa.backend.existence.aspect
 import org.tendiwa.backend.space.Reality
 import org.tendiwa.backend.space.aspects.Position
-import org.tendiwa.backend.space.chunks.chunkWithTile
-import org.tendiwa.backend.space.chunks.get
-import org.tendiwa.backend.space.lighting.lighting
 import org.tendiwa.backend.space.transparency.transparency
 import org.tendiwa.collections.withoutLast
 import org.tendiwa.plane.grid.constructors.centeredGridRectangle
@@ -34,11 +31,24 @@ class NPCVision : AbstractAspect() {
                     .tilesList
                     .withoutLast()
                     .all { reality.space.transparency.isTransparent(it) }
-            val isLit =
-                reality.space.lighting
-                    .chunkWithTile(position.tile)
-                    .get(position.tile) > 0
+            val isLit = isTileLit(position, reality)
             return closeEnough && isVisible && isLit
+        }
+    }
+
+    private fun isTileLit(position: Position, reality: Reality): Boolean {
+        val bubble = reality.simulation.bubbleAt(position.chunkCoordinate)
+        return if (bubble != null) {
+            bubble
+                .lighting
+                .luminosityAt(
+                    position.voxel.x,
+                    position.voxel.y,
+                    position.voxel.z
+                )
+                .level > 0
+        } else {
+            false
         }
     }
 }
